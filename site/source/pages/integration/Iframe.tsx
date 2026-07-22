@@ -34,7 +34,7 @@ import './iframe.css'
 
 import { pipe } from 'effect'
 
-import { SimulatorData } from '@/pages/simulateurs-et-assistants/metadata-src'
+import { SimulatorData } from '@/pages/simulateurs-et-assistants/configs-src'
 import { setupIframeMessageHandlers } from '@/utils/iframeMessageHandlers'
 
 import cciLogo from './images/cci.png'

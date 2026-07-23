@@ -17,7 +17,7 @@ import {
 	Spacing,
 	Strong,
 } from '@/design-system'
-import useSimulatorsData from '@/hooks/useSimulatorsData'
+import { useSimulatorsMetadata } from '@/hooks/useSimulatorsMetadata'
 import { useSitePaths } from '@/sitePaths'
 
 import illustrationSvg from './illustration.svg'
@@ -25,7 +25,7 @@ import illustration2Svg from './illustration2.svg'
 import SearchOrCreate from './SearchOrCreate'
 
 export default function Landing() {
-	const simulators = useSimulatorsData()
+	const simulators = useSimulatorsMetadata()
 	const { absoluteSitePaths } = useSitePaths()
 	const { t } = useTranslation()
 

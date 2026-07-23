@@ -15,7 +15,7 @@ import {
 	Strong,
 	Ul,
 } from '@/design-system'
-import useSimulatorsData from '@/hooks/useSimulatorsData'
+import { useSimulatorsMetadata } from '@/hooks/useSimulatorsMetadata'
 import { useSitePaths } from '@/sitePaths'
 
 import simulatorSvg from './illustration-simulateur.svg'
@@ -23,7 +23,7 @@ import simulatorSvg from './illustration-simulateur.svg'
 export default function SimulateursEtAssistants() {
 	const { t } = useTranslation()
 	const { absoluteSitePaths } = useSitePaths()
-	const simulators = useSimulatorsData()
+	const simulators = useSimulatorsMetadata()
 	const titre = t(
 		'pages.simulateurs.accueil.titre',
 		'Simulateurs et Assistants'

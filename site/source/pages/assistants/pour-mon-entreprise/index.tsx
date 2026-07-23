@@ -30,11 +30,12 @@ import {
 } from '@/design-system'
 import { Entreprise } from '@/domaine/Entreprise'
 import { premiersMoisUrssaf } from '@/external-links/premiersMoisUrssaf'
+import { usePageMetadata } from '@/hooks/usePageMetadata'
 import { useQuestionList } from '@/hooks/useQuestionList'
 import { useEntreprisesRepository } from '@/hooks/useRepositories'
 import { useSetEntreprise } from '@/hooks/useSetEntreprise'
 import useSimulationPublicodes from '@/hooks/useSimulationPublicodes'
-import useSimulatorsData from '@/hooks/useSimulatorsData'
+import { useSimulatorsMetadata } from '@/hooks/useSimulatorsMetadata'
 import { useNavigation } from '@/lib/navigation'
 import SimulateurPageLayout from '@/pages/simulateurs/SimulateurPageLayout'
 import { useSitePaths } from '@/sitePaths'
@@ -45,6 +46,8 @@ import { evaluateQuestion } from '@/utils/publicodes/publicodes'
 
 import forms from './forms.svg'
 import growth from './growth.svg'
+import { pourMonEntrepriseMetadata } from './metadata'
+import { configPourMonEntreprise } from './simulationConfig'
 
 export default function PourMonEntrepriseHome() {
 	const { relativeSitePaths } = useSitePaths()
@@ -64,9 +67,12 @@ const externalLinks = [premiersMoisUrssaf]
 
 function PourMonEntreprise() {
 	const { t } = useTranslation()
-	const simulateurs = useSimulatorsData()
-	const simulateurConfig = simulateurs['pour-mon-entreprise']
-	const { isReady, engine } = useSimulationPublicodes(simulateurConfig)
+	const simulateurs = useSimulatorsMetadata()
+	const metadata = usePageMetadata(pourMonEntrepriseMetadata)
+	const { isReady, engine } = useSimulationPublicodes(
+		metadata,
+		configPourMonEntreprise
+	)
 	const dispatch = useDispatch()
 	const engineSiren = engine.evaluate('entreprise . SIREN').nodeValue
 	const prevSiren = useRef(engineSiren)
@@ -120,7 +126,7 @@ function PourMonEntreprise() {
 
 			<EngineProvider value={engine}>
 				<SimulateurPageLayout
-					simulateurConfig={simulateurConfig}
+					metadata={metadata}
 					isReady={isReady}
 					externalLinks={externalLinks}
 				>
